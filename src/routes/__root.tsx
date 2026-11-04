@@ -3,7 +3,6 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } f
 import appCss from "../styles.css?url";
 import { SiteHeader, SiteFooter, GlobalChromeProvider, FooterDataProvider } from "@/components/site-layout";
 import { HydrationDebug } from "@/components/hydration-debug";
-import { IntercomWidget } from "@/components/intercom-widget";
 import { getSiteFooter } from "@/server/site-footer.functions";
 import {
   buildMeta,
@@ -94,7 +93,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const data = Route.useLoaderData();
-  const showIntercom = pathname === "/" || pathname.startsWith("/admin");
   const footer = data?.footer;
   const content = (
     <>
@@ -108,7 +106,6 @@ function RootComponent() {
         </div>
         <SiteFooter />
       </div>
-      {showIntercom && <IntercomWidget />}
     </>
   );
   if (footer) {
